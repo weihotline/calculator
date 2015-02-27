@@ -3,33 +3,33 @@ require "00_calculator"
 RSpec.describe Calculator do
   subject(:calc) { Calculator.new }
 
-  describe "::convertToPostfix" do
+  describe "::convert_to_postfix" do
     context "when empty string is passed" do
       it "should return empty array" do
-        postfix = Calculator.convertToPostfix("")
+        postfix = Calculator.convert_to_postfix("")
         expect(postfix.count).to eq 0
       end
     end
 
     context "when valid infix expression is passed" do
       it "should return an array with postfix notation" do
-        postfix = Calculator.convertToPostfix("1+2")
+        postfix = Calculator.convert_to_postfix("1+2")
         expect(postfix).to eq ["1", "2", "+"]
       end
 
       it "should return an array without parenthesis" do
-        postfix = Calculator.convertToPostfix("(1+2)*4")
+        postfix = Calculator.convert_to_postfix("(1+2)*4")
         expect(postfix.include?("(")).to be false
         expect(postfix.include?(")")).to be false
       end
 
       it "should handle floating number" do
-        postfix = Calculator.convertToPostfix("2-1.4*2.5")
+        postfix = Calculator.convert_to_postfix("2-1.4*2.5")
         expect(postfix).to eq ["2", "1.4", "2.5", "*", "-"]
       end
 
       it "should handle whitespaces" do
-        postfix = Calculator.convertToPostfix("    1  +   2")
+        postfix = Calculator.convert_to_postfix("    1  +   2")
         expect(postfix).to eq ["1", "2", "+"]
       end
     end

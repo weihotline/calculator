@@ -30,7 +30,7 @@ class Calculator
   end
 
   def evaluate(exp)
-    rpn = self.class.convertToPostfix(exp)
+    rpn = self.class.convert_to_postfix(exp)
     rpn = tokenize(rpn)
 
     until rpn.count == 0
@@ -46,7 +46,7 @@ class Calculator
     format(@cal_stack.pop || 0)
   end
 
-  def self.convertToPostfix(infix)
+  def self.convert_to_postfix(infix)
     infix = infix.scan(/\d+\.\d+|\d+|[\+\-\*\/\^\(\)]/)
     postfix = []
     opt_stack = []
@@ -55,7 +55,7 @@ class Calculator
     infix.each do |next_char|
       done = false
 
-      if isNumeric?(next_char)
+      if is_numeric?(next_char)
         postfix << next_char
       else
         case next_char
@@ -65,7 +65,7 @@ class Calculator
           while !done && !opt_stack.empty?
             top_opt = opt_stack.last
 
-            if getPrecedence(next_char) <= getPrecedence(top_opt)
+            if get_precedence(next_char) <= get_precedence(top_opt)
               postfix << top_opt
               opt_stack.pop
             else
@@ -125,11 +125,11 @@ class Calculator
       @cal_stack << value
     end
 
-    def self.isNumeric?(char)
+    def self.is_numeric?(char)
       !!(char =~ /^\d+/)
     end
 
-    def self.getPrecedence(opt)
+    def self.get_precedence(opt)
       case opt
         when "(", ")" then 0
         when "+", "-" then 1
