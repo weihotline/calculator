@@ -12,7 +12,7 @@ RSpec.describe Calculator do
     end
 
     context "when valid infix expression is passed" do
-      it "should return an array with postfix notation" do
+      it "should return an array in postfix notation order" do
         postfix = Calculator.convert_to_postfix("1+2")
         expect(postfix).to eq ["1", "2", "+"]
       end
@@ -23,12 +23,12 @@ RSpec.describe Calculator do
         expect(postfix.include?(")")).to be false
       end
 
-      it "should handle floating number" do
+      it "should handle floating number properly" do
         postfix = Calculator.convert_to_postfix("2-1.4*2.5")
         expect(postfix).to eq ["2", "1.4", "2.5", "*", "-"]
       end
 
-      it "should handle whitespaces" do
+      it "should handle whitespaces properly" do
         postfix = Calculator.convert_to_postfix("    1  +   2")
         expect(postfix).to eq ["1", "2", "+"]
       end
@@ -44,27 +44,27 @@ RSpec.describe Calculator do
     end
 
     context "when valid infix expression is passed" do
-      it "should handle simple addition" do
+      it "should handle simple addition properly" do
         result = calc.evaluate("1+2")
         expect(result).to eq 3
       end
 
-      it "should handle addition and multiplication" do
+      it "should handle addition and multiplication properly" do
         result = calc.evaluate("2+4*5")
         expect(result).to eq 22
       end
 
-      it "should handle exponentiation" do
+      it "should handle exponentiation properly" do
         result = calc.evaluate("10^2")
         expect(result).to eq 100
       end
 
-      it "should handle parenthesis" do
+      it "should handle parenthesis properly" do
         result = calc.evaluate("10*2/2+(13-3)")
         expect(result).to eq 20
       end
 
-      it "should handle floating number" do
+      it "should handle floating number properly" do
         result = calc.evaluate("12.1+12.9")
         expect(result.to_s).to eq "25"
 
