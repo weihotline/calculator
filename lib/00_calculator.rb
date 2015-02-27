@@ -121,6 +121,7 @@ class Calculator
         when :^
           left_num ** right_num
       end
+
       @cal_stack << value
     end
 
